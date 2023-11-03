@@ -65,3 +65,12 @@ If you use significant portions of our code or ideas from our paper in your rese
 ### Questions or Comments
 
 Please direct any questions or comments to me; I am happy to help in any way I can. You can either comment on the [project page](https://rodneylalonde.wixsite.com/personal/research-blog/capsules-for-object-segmentation), or email me directly at lalonde@knights.ucf.edu.
+
+## Modifications
+### By Mikel Barajas
+
+* Ported to Python 3.7
+* Changed requirements.txt to match
+* Added more output visualizations to train.py
+
+
