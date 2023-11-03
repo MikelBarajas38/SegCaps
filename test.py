@@ -111,7 +111,7 @@ def test(args, test_list, model_list, net_input_shape):
     # Testing the network
     print('Testing... This will take some time...')
 
-    with open(join(output_dir, args.save_prefix + outfile + 'scores.csv'), 'wb') as csvfile:
+    with open(join(output_dir, args.save_prefix + outfile + 'scores.csv'), 'w') as csvfile:
         writer = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
         row = ['Scan Name']
@@ -189,6 +189,98 @@ def test(args, test_list, model_list, net_input_shape):
             fig.suptitle(img[0][:-4])
 
             plt.savefig(join(fig_out_dir, img[0][:-4] + '_qual_fig' + '.png'),
+                        format='png', bbox_inches='tight')
+            plt.close('all')
+
+            #just the mask
+            print('Creating mask Figure for Quick Reference')
+            f, ax = plt.subplots(1, 3, figsize=(15, 5))
+
+            #ax[0].imshow(img_data[img_data.shape[0] // 3, :, :], alpha=1, cmap='gray')
+            ax[0].imshow(output_bin[img_data.shape[0] // 3, :, :], alpha=0.5, cmap='Blues')
+            #ax[0].imshow(gt_data[img_data.shape[0] // 3, :, :], alpha=0.2, cmap='Reds')
+            ax[0].set_title('Slice {}/{}'.format(img_data.shape[0] // 3, img_data.shape[0]))
+            ax[0].axis('off')
+
+            #ax[1].imshow(img_data[img_data.shape[0] // 2, :, :], alpha=1, cmap='gray')
+            ax[1].imshow(output_bin[img_data.shape[0] // 2, :, :], alpha=0.5, cmap='Blues')
+            # ax[1].imshow(gt_data[img_data.shape[0] // 2, :, :], alpha=0.2, cmap='Reds')
+            ax[1].set_title('Slice {}/{}'.format(img_data.shape[0] // 2, img_data.shape[0]))
+            ax[1].axis('off')
+
+            #ax[2].imshow(img_data[img_data.shape[0] // 2 + img_data.shape[0] // 4, :, :], alpha=1, cmap='gray')
+            ax[2].imshow(output_bin[img_data.shape[0] // 2 + img_data.shape[0] // 4, :, :], alpha=0.5,
+                         cmap='Blues')
+            # ax[2].imshow(gt_data[img_data.shape[0] // 2 + img_data.shape[0] // 4, :, :], alpha=0.2, cmap='Reds')
+            ax[2].set_title(
+                'Slice {}/{}'.format(img_data.shape[0] // 2 + img_data.shape[0] // 4, img_data.shape[0]))
+            ax[2].axis('off')
+
+            fig = plt.gcf()
+            fig.suptitle(img[0][:-4])
+
+            plt.savefig(join(fig_out_dir, img[0][:-4] + '_qual_fig_masks' + '.png'),
+                        format='png', bbox_inches='tight')
+            plt.close('all')
+
+            #just the gt mask
+            print('Creating gt Figure for Quick Reference')
+            f, ax = plt.subplots(1, 3, figsize=(15, 5))
+
+            #ax[0].imshow(img_data[img_data.shape[0] // 3, :, :], alpha=1, cmap='gray')
+            #ax[0].imshow(output_bin[img_data.shape[0] // 3, :, :], alpha=0.5, cmap='Blues')
+            ax[0].imshow(gt_data[img_data.shape[0] // 3, :, :], alpha=0.2, cmap='Reds')
+            ax[0].set_title('Slice {}/{}'.format(img_data.shape[0] // 3, img_data.shape[0]))
+            ax[0].axis('off')
+
+            #ax[1].imshow(img_data[img_data.shape[0] // 2, :, :], alpha=1, cmap='gray')
+            # ax[1].imshow(output_bin[img_data.shape[0] // 2, :, :], alpha=0.5, cmap='Blues')
+            ax[1].imshow(gt_data[img_data.shape[0] // 2, :, :], alpha=0.2, cmap='Reds')
+            ax[1].set_title('Slice {}/{}'.format(img_data.shape[0] // 2, img_data.shape[0]))
+            ax[1].axis('off')
+
+            #ax[2].imshow(img_data[img_data.shape[0] // 2 + img_data.shape[0] // 4, :, :], alpha=1, cmap='gray')
+            #ax[2].imshow(output_bin[img_data.shape[0] // 2 + img_data.shape[0] // 4, :, :], alpha=0.5,            cmap='Blues')
+            ax[2].imshow(gt_data[img_data.shape[0] // 2 + img_data.shape[0] // 4, :, :], alpha=0.2, cmap='Reds')
+            ax[2].set_title(
+                'Slice {}/{}'.format(img_data.shape[0] // 2 + img_data.shape[0] // 4, img_data.shape[0]))
+            ax[2].axis('off')
+
+            fig = plt.gcf()
+            fig.suptitle(img[0][:-4])
+
+            plt.savefig(join(fig_out_dir, img[0][:-4] + '_qual_fig_masks_gt' + '.png'),
+                        format='png', bbox_inches='tight')
+            plt.close('all')
+
+            #just the mask and img
+            print('Creating mask and img Figure for Quick Reference')
+            f, ax = plt.subplots(1, 3, figsize=(15, 5))
+
+            ax[0].imshow(img_data[img_data.shape[0] // 3, :, :], alpha=1, cmap='gray')
+            ax[0].imshow(output_bin[img_data.shape[0] // 3, :, :], alpha=0.5, cmap='Blues')
+            #ax[0].imshow(gt_data[img_data.shape[0] // 3, :, :], alpha=0.2, cmap='Reds')
+            ax[0].set_title('Slice {}/{}'.format(img_data.shape[0] // 3, img_data.shape[0]))
+            ax[0].axis('off')
+
+            ax[1].imshow(img_data[img_data.shape[0] // 2, :, :], alpha=1, cmap='gray')
+            ax[1].imshow(output_bin[img_data.shape[0] // 2, :, :], alpha=0.5, cmap='Blues')
+            # ax[1].imshow(gt_data[img_data.shape[0] // 2, :, :], alpha=0.2, cmap='Reds')
+            ax[1].set_title('Slice {}/{}'.format(img_data.shape[0] // 2, img_data.shape[0]))
+            ax[1].axis('off')
+
+            ax[2].imshow(img_data[img_data.shape[0] // 2 + img_data.shape[0] // 4, :, :], alpha=1, cmap='gray')
+            ax[2].imshow(output_bin[img_data.shape[0] // 2 + img_data.shape[0] // 4, :, :], alpha=0.5,
+                         cmap='Blues')
+            # ax[2].imshow(gt_data[img_data.shape[0] // 2 + img_data.shape[0] // 4, :, :], alpha=0.2, cmap='Reds')
+            ax[2].set_title(
+                'Slice {}/{}'.format(img_data.shape[0] // 2 + img_data.shape[0] // 4, img_data.shape[0]))
+            ax[2].axis('off')
+
+            fig = plt.gcf()
+            fig.suptitle(img[0][:-4])
+
+            plt.savefig(join(fig_out_dir, img[0][:-4] + '_qual_fig_masks_and_img' + '.png'),
                         format='png', bbox_inches='tight')
             plt.close('all')
 
